@@ -1,13 +1,16 @@
 package bucketsort;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     
     public static void main(String[] args) {
-        List<Integer> data = Data.getDataFromFile("pattern.txt");
-        
-        Data.generatePatternFile("pattern.txt", "10 0", 10000);
+        Data.generateRandomFile("random.txt", -1000, 1000, 10000000);
+        List<Integer> list = Data.loadDataFromFile("random.txt");
+        Integer[] array = new Integer[list.size()];
+        array = list.toArray(array);
+        BucketSort.sort(array, 5);
         
     }
     

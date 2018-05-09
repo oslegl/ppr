@@ -1,17 +1,10 @@
 package bucketsort;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Writer;
-import static java.lang.Integer.max;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,7 +15,7 @@ public class Data {
 
     private final static Logger LOGGER = Logger.getLogger(Data.class.getName());
     
-    public static List<Integer> getDataFromFile(String fileName){
+    public static List<Integer> loadDataFromFile(String fileName){
         String filePath = new File("").getAbsolutePath();
         filePath = filePath.concat("\\data\\"+fileName);
         System.out.println("filepath long: " + filePath);
@@ -65,6 +58,33 @@ public class Data {
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));){
             for(int i = 0; i < count; i++){
                 writer.write(pattern + " ");
+            }
+            writer.close();
+        }catch(IOException e){}
+    }
+    
+    public static void generateRangeFile(String fileName, int from, int to){
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath.concat("\\data\\"+fileName);        
+        
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));){
+            for(int i = from; i <= to; i++){
+                writer.write(i + " ");
+            }
+            writer.close();
+        }catch(IOException e){}
+    }
+    
+    public static void generateRangeWithOffsetFile(String fileName, int from, int offset, int count){
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath.concat("\\data\\"+fileName);        
+        
+        int value = from;
+        
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));){
+            for(int i = 0; i < count; i++){
+                writer.write(value + " ");
+                value += offset;
             }
             writer.close();
         }catch(IOException e){}
