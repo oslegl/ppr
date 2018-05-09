@@ -7,6 +7,7 @@ import java.util.List;
 public class BucketSort {
     
     public static void sort(Integer[] array, int bucketSize) {
+        System.out.println("start sorting...");
         if (array.length == 0) {
             return;
         }
