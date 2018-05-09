@@ -1,10 +1,13 @@
 package bucketsort;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +21,6 @@ public class Data {
     public static List<Integer> loadDataFromFile(String fileName){
         String filePath = new File("").getAbsolutePath();
         filePath = filePath.concat("\\data\\"+fileName);
-        System.out.println("filepath long: " + filePath);
 
         List<Integer> result = new ArrayList<>();
         
@@ -35,6 +37,27 @@ public class Data {
         }
         
         LOGGER.info("file successfully read, integer counts: " + result.size());
+        return result;
+    }
+    
+    public static List<Integer> loadData(String fileName){
+        List<Integer> result = new ArrayList<>();
+        
+        String filePath = new File("").getAbsolutePath();
+        filePath = filePath.concat("\\data\\"+fileName);
+        
+        BufferedReader br = null;
+
+        try {
+            br = new BufferedReader(new FileReader(filePath), 10000);
+            String[] line = br.readLine().split(" ");
+            for(int i = 0; i < line.length; i++){
+                int value = Integer.parseInt(line[i]);
+                result.add(value);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return result;
     }
     
